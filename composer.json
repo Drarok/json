@@ -1,0 +1,26 @@
+{
+    "name": "zerifas/json",
+    "description": "Define a schema for your JSON documents, and validate them",
+    "authors": [
+        {
+            "name": "Mat Gadd",
+            "email": "mat@zerifas.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "Zerifas\\JSON\\": "src/"
+      }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Zerifas\\JSON\\Test\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=5.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8.27"
+    }
+}

@@ -296,5 +296,4 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid($json));
         $this->assertEquals($keys, $validator->getDocument());
     }
-
 }

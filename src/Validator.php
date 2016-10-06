@@ -84,7 +84,12 @@ class Validator
                 $actualType = Value::getType($jsonValue);
 
                 if ($expectedType !== $actualType) {
-                    $this->addError('Key path \'%s\' should be %s, but is %s.', $currentKeyPath, $expectedType, $actualType);
+                    $this->addError(
+                        'Key path \'%s\' should be %s, but is %s.',
+                        $currentKeyPath,
+                        $expectedType,
+                        $actualType
+                    );
                     continue;
                 }
             }

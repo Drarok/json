@@ -14,7 +14,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testSimpleValidation()
     {
         $schema = new JSON\Object([
-            'requiredString'  => new JSON\String(),
+            'requiredStr'  => new JSON\Str(),
             'requiredNumber'  => new JSON\Number(),
             'requiredObject'  => new JSON\Object([]),
             'requiredArray'   => new JSON\Arr(),
@@ -22,7 +22,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $json = json_encode([
-            'requiredString'  => 'Hello',
+            'requiredStr'  => 'Hello',
             'requiredNumber'  => 15,
             'requiredObject'  => (object) [],
             'requiredArray'   => [15],
@@ -40,7 +40,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testMissingRequiredValue()
     {
         $schema = new JSON\Object([
-            'required' => new JSON\String(),
+            'required' => new JSON\Str(),
         ]);
 
         $json = json_encode([
@@ -59,7 +59,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testIncorrectRequiredValue()
     {
         $schema = new JSON\Object([
-            'required' => new JSON\String(),
+            'required' => new JSON\Str(),
         ]);
 
         $json = json_encode([
@@ -78,8 +78,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testOptionalValues()
     {
         $schema = new JSON\Object([
-            'optionalNullString'     => new JSON\OptionalString(),
-            'optionalDefaultString'  => new JSON\OptionalString('Hello, World!'),
+            'optionalNullStr'     => new JSON\OptionalStr(),
+            'optionalDefaultStr'  => new JSON\OptionalStr('Hello, World!'),
             'optionalNullNumber'     => new JSON\OptionalNumber(),
             'optionalDefaultNumber'  => new JSON\OptionalNumber(15),
             'optionalNullObject'     => new JSON\OptionalObject([]),
@@ -94,8 +94,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $expected = (object) [
-            'optionalNullString'     => null,
-            'optionalDefaultString'  => 'Hello, World!',
+            'optionalNullStr'     => null,
+            'optionalDefaultStr'  => 'Hello, World!',
             'optionalNullNumber'     => null,
             'optionalDefaultNumber'  => 15,
             'optionalNullObject'     => null,
@@ -136,7 +136,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
             'keys'  => new JSON\Arr(new JSON\Number()),
             'posts' => new JSON\Arr(
                 new JSON\Object([
-                    'id' => new JSON\String(),
+                    'id' => new JSON\Str(),
                     'extra' => new JSON\OptionalBoolean(),
                 ])
             ),

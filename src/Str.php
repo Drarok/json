@@ -2,6 +2,6 @@
 
 namespace Zerifas\JSON;
 
-class String extends Value
+class Str extends Value
 {
 }

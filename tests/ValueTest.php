@@ -43,8 +43,8 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function getAllValueTypes()
     {
         return [
-            [new JSON\String(), 'string'],
-            [new JSON\OptionalString(), 'string'],
+            [new JSON\Str(), 'string'],
+            [new JSON\OptionalStr(), 'string'],
             [new JSON\Number(), 'number'],
             [new JSON\OptionalNumber(), 'number'],
             [new JSON\Object(), 'object'],
@@ -84,9 +84,9 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     public function getAllDebugValueTypes()
     {
         return [
-            [new JSON\String(), 'String()'],
-            [new JSON\OptionalString(), 'OptionalString(default = null)'],
-            [new JSON\OptionalString('def'), 'OptionalString(default = "def")'],
+            [new JSON\Str(), 'Str()'],
+            [new JSON\OptionalStr(), 'OptionalStr(default = null)'],
+            [new JSON\OptionalStr('def'), 'OptionalStr(default = "def")'],
 
             [new JSON\Number(), 'Number()'],
             [new JSON\OptionalNumber(), 'OptionalNumber(default = null)'],

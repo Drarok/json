@@ -12,8 +12,8 @@ abstract class Value
     const TYPE_NULL    = 'null';
 
     protected static $classMap = [
-        String::class          => self::TYPE_STRING,
-        OptionalString::class  => self::TYPE_STRING,
+        Str::class             => self::TYPE_STRING,
+        OptionalStr::class     => self::TYPE_STRING,
         Number::class          => self::TYPE_NUMBER,
         OptionalNumber::class  => self::TYPE_NUMBER,
         Object::class          => self::TYPE_OBJECT,

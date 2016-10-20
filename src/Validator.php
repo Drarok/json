@@ -5,12 +5,14 @@ namespace Zerifas\JSON;
 class Validator
 {
     protected $collection;
+    protected $strict;
     protected $errors;
     protected $document;
 
-    public function __construct(CollectionValue $collection)
+    public function __construct(CollectionValue $collection, $strict = false)
     {
         $this->collection = $collection;
+        $this->strict = $strict;
     }
 
     public function isValid($json)
@@ -58,6 +60,7 @@ class Validator
         }
 
         $document = [];
+        $recursionQueue = [];
 
         foreach ($schema as $key => $value) {
             if ($isArray) {
@@ -95,10 +98,30 @@ class Validator
             }
 
             if ($value instanceof CollectionValue && $value->getSchema()) {
-                $document[$key] = $this->validate($jsonValue, $value, $currentKeyPath);
+                // We want to check all of the keys at the current level before recursing,
+                // so we add them into a queue which is executed after strict mode checks.
+                $recursionQueue[] = function (&$document) use ($key, $jsonValue, $value, $currentKeyPath) {
+                    $document[$key] = $this->validate($jsonValue, $value, $currentKeyPath);
+                };
             } else {
                 $document[$key] = $jsonValue;
             }
+        }
+
+        $isObject = (
+            $collection instanceof Object ||
+            $collection instanceof OptionalObject
+        );
+
+        if ($this->strict && $isObject) {
+            $extraKeys = array_diff(array_keys((array) $obj), array_keys($schema));
+            foreach ($extraKeys as $k) {
+                $this->addError('Key path \'%s\' is unexpected in strict mode.', trim($keyPath . '.' . $k, '.'));
+            }
+        }
+
+        foreach ($recursionQueue as $fn) {
+            $fn($document);
         }
 
         return $isArray ? $document : (object) $document;

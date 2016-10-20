@@ -37,6 +37,35 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($valid);
     }
 
+    public function testStrictValidation()
+    {
+        $schema = new JSON\Object([
+            'key'    => new JSON\Boolean(),
+            'object' => new JSON\Object([
+                'innerKey' => new JSON\Boolean(),
+            ]),
+        ]);
+
+        $json = json_encode([
+            'key'    => true,
+            'extra'  => false,
+            'object' => [
+                'innerKey'   => true,
+                'innerExtra' => false,
+            ],
+        ]);
+
+        $expectedErrors = [
+            'Key path \'extra\' is unexpected in strict mode.',
+            'Key path \'object.innerExtra\' is unexpected in strict mode.',
+        ];
+
+        $validator = new JSON\Validator($schema, true);
+        $valid = $validator->isValid($json);
+        $this->assertFalse($valid);
+        $this->assertEquals($expectedErrors, $validator->getErrors());
+    }
+
     public function testMissingRequiredValue()
     {
         $schema = new JSON\Object([

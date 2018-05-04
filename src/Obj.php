@@ -2,7 +2,7 @@
 
 namespace Zerifas\JSON;
 
-class Object extends Value implements CollectionValue
+class Obj extends Value implements CollectionValue
 {
     use CollectionTrait;
 

@@ -2,7 +2,7 @@
 
 namespace Zerifas\JSON;
 
-class OptionalObject extends OptionalValue implements CollectionValue
+class OptionalObj extends OptionalValue implements CollectionValue
 {
     use CollectionTrait;
 

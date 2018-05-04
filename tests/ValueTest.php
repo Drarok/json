@@ -4,7 +4,7 @@ namespace Zerifas\JSON\Test;
 
 use Zerifas\JSON;
 
-class ValueTest extends \PHPUnit_Framework_TestCase
+class ValueTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider getAllJSONTypes

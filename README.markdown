@@ -19,14 +19,14 @@ require 'vendor/autoload.php';
 
 use Zerifas\JSON;
 
-$schema = new JSON\Object([
+$schema = new JSON\Obj([
     'id' => new JSON\Number(),
     'enabled' => new JSON\OptionalBoolean(false),
     'array' => new JSON\Arr(),
     'stringArray' => new JSON\Arr(new JSON\Str()),
     'optionalArray' => new JSON\OptionalArr(),
     'optionalStringArray' => new JSON\OptionalArr(new JSON\Str()),
-    'optionalObject' => new JSON\OptionalObject(
+    'optionalObj' => new JSON\OptionalObj(
         [
             'name' => new JSON\Str(),
         ],
@@ -41,7 +41,7 @@ $json = '{"id":1,"array":[],"stringArray":["Hello","World"]}';
 if ($v->isValid($json)) {
     $doc = $v->getDocument();
     echo implode(', ', $doc->stringArray), PHP_EOL; // Hello, World
-    echo $doc->optionalObject->name, PHP_EOL; // Alice
+    echo $doc->optionalObj->name, PHP_EOL; // Alice
 }
 
 // This is not valid for 2 reasons: `id` is missing, and `array` is a number.

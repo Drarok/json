@@ -13,18 +13,18 @@ class ValidatorTest extends \PHPUnit\Framework\TestCase
 
     public function testSimpleValidation()
     {
-        $schema = new JSON\Object([
-            'requiredStr'  => new JSON\Str(),
+        $schema = new JSON\Obj([
+            'requiredStr'     => new JSON\Str(),
             'requiredNumber'  => new JSON\Number(),
-            'requiredObject'  => new JSON\Object([]),
+            'requiredObj'     => new JSON\Obj([]),
             'requiredArray'   => new JSON\Arr(),
             'requiredBoolean' => new JSON\Boolean(),
         ]);
 
         $json = json_encode([
-            'requiredStr'  => 'Hello',
+            'requiredStr'     => 'Hello',
             'requiredNumber'  => 15,
-            'requiredObject'  => (object) [],
+            'requiredObj'     => (object) [],
             'requiredArray'   => [15],
             'requiredBoolean' => true,
         ]);
@@ -39,7 +39,7 @@ class ValidatorTest extends \PHPUnit\Framework\TestCase
 
     public function testMissingRequiredValue()
     {
-        $schema = new JSON\Object([
+        $schema = new JSON\Obj([
             'required' => new JSON\Str(),
         ]);
 
@@ -58,7 +58,7 @@ class ValidatorTest extends \PHPUnit\Framework\TestCase
 
     public function testIncorrectRequiredValue()
     {
-        $schema = new JSON\Object([
+        $schema = new JSON\Obj([
             'required' => new JSON\Str(),
         ]);
 
@@ -77,13 +77,13 @@ class ValidatorTest extends \PHPUnit\Framework\TestCase
 
     public function testOptionalValues()
     {
-        $schema = new JSON\Object([
+        $schema = new JSON\Obj([
             'optionalNullStr'     => new JSON\OptionalStr(),
             'optionalDefaultStr'  => new JSON\OptionalStr('Hello, World!'),
             'optionalNullNumber'     => new JSON\OptionalNumber(),
             'optionalDefaultNumber'  => new JSON\OptionalNumber(15),
-            'optionalNullObject'     => new JSON\OptionalObject([]),
-            'optionalDefaultObject'  => new JSON\OptionalObject([], ['key' => 'value']),
+            'optionalNullObj'     => new JSON\OptionalObj([]),
+            'optionalDefaultObj'  => new JSON\OptionalObj([], ['key' => 'value']),
             'optionalNullArray'      => new JSON\OptionalArr(),
             'optionalDefaultArray'   => new JSON\OptionalArr(null, [1, 2, 3]),
             'optionalNullBoolean'    => new JSON\OptionalBoolean(),
@@ -94,12 +94,12 @@ class ValidatorTest extends \PHPUnit\Framework\TestCase
         ]);
 
         $expected = (object) [
-            'optionalNullStr'     => null,
-            'optionalDefaultStr'  => 'Hello, World!',
+            'optionalNullStr'        => null,
+            'optionalDefaultStr'     => 'Hello, World!',
             'optionalNullNumber'     => null,
             'optionalDefaultNumber'  => 15,
-            'optionalNullObject'     => null,
-            'optionalDefaultObject'  => (object) ['key' => 'value'],
+            'optionalNullObj'        => null,
+            'optionalDefaultObj'     => (object) ['key' => 'value'],
             'optionalNullArray'      => null,
             'optionalDefaultArray'   => [1, 2, 3],
             'optionalNullBoolean'    => null,
@@ -113,8 +113,8 @@ class ValidatorTest extends \PHPUnit\Framework\TestCase
 
     public function testRecursion()
     {
-        $schema = new JSON\Object([
-            'result' => new JSON\Object([
+        $schema = new JSON\Obj([
+            'result' => new JSON\Obj([
                 'values' => new JSON\Arr(),
             ]),
         ]);
@@ -132,10 +132,10 @@ class ValidatorTest extends \PHPUnit\Framework\TestCase
 
     public function testValidUniformArrays()
     {
-        $schema = new JSON\Object([
+        $schema = new JSON\Obj([
             'keys'  => new JSON\Arr(new JSON\Number()),
             'posts' => new JSON\Arr(
-                new JSON\Object([
+                new JSON\Obj([
                     'id' => new JSON\Str(),
                     'extra' => new JSON\OptionalBoolean(),
                 ])
@@ -181,7 +181,7 @@ class ValidatorTest extends \PHPUnit\Framework\TestCase
 
     public function testInvalidUniformArrays()
     {
-        $schema = new JSON\Object([
+        $schema = new JSON\Obj([
             'keys'  => new JSON\Arr(new JSON\Number()),
         ]);
 
@@ -205,7 +205,7 @@ class ValidatorTest extends \PHPUnit\Framework\TestCase
 
     public function testNonUniformArray()
     {
-        $schema = new JSON\Object([
+        $schema = new JSON\Obj([
             'keys'  => new JSON\Arr(),
         ]);
 

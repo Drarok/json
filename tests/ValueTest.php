@@ -47,8 +47,8 @@ class ValueTest extends \PHPUnit\Framework\TestCase
             [new JSON\OptionalStr(), 'string'],
             [new JSON\Number(), 'number'],
             [new JSON\OptionalNumber(), 'number'],
-            [new JSON\Object(), 'object'],
-            [new JSON\OptionalObject(), 'object'],
+            [new JSON\Obj(), 'object'],
+            [new JSON\OptionalObj(), 'object'],
             [new JSON\Arr(), 'array'],
             [new JSON\OptionalArr(), 'array'],
             [new JSON\Boolean(), 'boolean'],
@@ -61,7 +61,8 @@ class ValueTest extends \PHPUnit\Framework\TestCase
      */
     public function testInvalidClasses($class)
     {
-        $this->setExpectedException('InvalidArgumentException', 'Unknown class: ');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Unknown class: ');
         JSON\Value::getType(new $class());
     }
 
@@ -92,13 +93,13 @@ class ValueTest extends \PHPUnit\Framework\TestCase
             [new JSON\OptionalNumber(), 'OptionalNumber(default = null)'],
             [new JSON\OptionalNumber(42), 'OptionalNumber(default = 42)'],
 
-            [new JSON\Object(), 'Object()'],
-            [new JSON\Object([]), 'Object()'],
-            [new JSON\OptionalObject(), 'OptionalObject(default = null)'],
-            [new JSON\OptionalObject([], null), 'OptionalObject(default = null)'],
-            [new JSON\OptionalObject(null, []), 'OptionalObject(default = {})'],
-            [new JSON\OptionalObject([], []), 'OptionalObject(default = {})'],
-            [new JSON\OptionalObject([], ['key' => 'value']), 'OptionalObject(default = {"key":"value"})'],
+            [new JSON\Obj(), 'Obj()'],
+            [new JSON\Obj([]), 'Obj()'],
+            [new JSON\OptionalObj(), 'OptionalObj(default = null)'],
+            [new JSON\OptionalObj([], null), 'OptionalObj(default = null)'],
+            [new JSON\OptionalObj(null, []), 'OptionalObj(default = {})'],
+            [new JSON\OptionalObj([], []), 'OptionalObj(default = {})'],
+            [new JSON\OptionalObj([], ['key' => 'value']), 'OptionalObj(default = {"key":"value"})'],
 
             [new JSON\Arr(), 'Arr()'],
             [new JSON\OptionalArr(), 'OptionalArr(default = null)'],
@@ -130,8 +131,8 @@ class ValueTest extends \PHPUnit\Framework\TestCase
 
     public function testInvalidArraySchema()
     {
-        $this->setExpectedException(
-            'InvalidArgumentException',
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(
             'Zerifas\\JSON\\Arr schema values must be instances of Zerifas\\JSON\\Value'
         );
         $schema = new JSON\Arr(15);

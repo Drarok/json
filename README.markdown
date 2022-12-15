@@ -1,4 +1,6 @@
-# JSON [![Build Status](https://travis-ci.org/Drarok/json.svg?branch=develop)](https://travis-ci.org/Drarok/json) [![Coverage Status](https://coveralls.io/repos/github/Drarok/json/badge.svg)](https://coveralls.io/github/Drarok/json)
+# JSON ![Build Status](https://github.com/drarok/json/actions/workflows/php.yml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/Drarok/json/badge.svg)](https://coveralls.io/github/Drarok/json)
+
+
 
 This is a small library allowing you to define a schema for your JSON documents, validate them, and get a "safe" version of the document, with all optional values set to their defaults.
 

@@ -6,11 +6,6 @@ use Zerifas\JSON;
 
 class ValidatorTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     public function testSimpleValidation()
     {
         $schema = new JSON\Obj([

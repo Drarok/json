@@ -1,0 +1,28 @@
+name: Tests
+
+on:
+  - push
+
+jobs:
+  run:    
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: ['8.0', '8.1', '8.2']
+    name: Test JSON on ${{ matrix.php-versions }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-versions }}
+        # extensions: intl
+        # ini-values: "post_max_size=256M"
+    - name: Check PHP version
+      run: php -v
+    - uses: "ramsey/composer-install@v2"
+    - name: Run tests
+      run: composer run test
+    - name: Upload coverage results
+      env:
+        COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: vendor/bin/php-coveralls -v --coverage_clover=tmp/clover.xml --json_path=tmp/coveralls-upload.json

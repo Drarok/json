@@ -27,7 +27,6 @@
     },
     "scripts": {
         "lint": "phpcs --standard=PSR2 src/ tests/",
-        "test": "phpunit",
-        "test:coverage": "phpunit --coverage-clover build/logs/clover.xml && php-coveralls"
+        "test": "phpunit"
     }
 }
